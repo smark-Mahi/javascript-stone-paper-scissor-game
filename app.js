@@ -9,6 +9,22 @@ const getGameBoard = document.querySelector(".game");
 const getOption = document.querySelectorAll(".circle");
 const gameContainer = getGameBoard.querySelector(".gameContainer");
 
+let bg = `radial-gradient(
+  20% 50% at 50% 120px,
+  hsl(229, 64%, 46%) 60%,
+  transparent 10%
+),
+radial-gradient(
+  30% 190px at 50% 50%,
+  hsl(229, 60%, 34%) 60%,
+  transparent 0%
+),
+radial-gradient(
+  40% 250px at 50% 50%,
+  hsl(229, 42%, 38%) 60%,
+  transparent 0%
+);`;
+
 console.log(getOption, "images");
 var userSelectedOption;
 var houseSelectedOption;
@@ -51,6 +67,11 @@ getGameBoard.addEventListener("click", (e) => {
   var getUserPickedbackBorderColor = "";
   var getHousePickedbackBorderColor = "";
   userSelectedOption = e.target;
+  if (userSelectedOption.className === "circle") {
+    const img = userSelectedOption.querySelector(".img");
+    userSelectedOption = img;
+    console.log(e.target, img, userSelectedOption.className, "target");
+  }
   mainContainer.removeChild(getGameBoard);
   const nextStepContainer = document.createElement("div");
   mainContainer.appendChild(nextStepContainer);
@@ -155,6 +176,13 @@ getGameBoard.addEventListener("click", (e) => {
       : num > 0
       ? +num - scoreCount
       : 0;
+    // if (!turn) {
+    //   const getUserPicked = document.querySelector(".userPicked");
+    //   getUserPicked.classList.add("");
+    // } else {
+    //   const housePickedElement = document.querySelector(".housePicked");
+    //   housePickedElement.classList.add("result-div");
+    // }
     var buttonEle = document.createElement("Button");
     buttonEle.innerHTML = "PLAY AGAIN";
     result.appendChild(buttonEle);
